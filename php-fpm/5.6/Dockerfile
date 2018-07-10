@@ -115,5 +115,5 @@ RUN set -ex \
 EXPOSE 9056
 
 # 执行命令
-CMD ["tee","/dev/null"]
-CMD ["/etc/init.d/php-fpm56","start"]
+# ENTRYPOINT php-fpm56 --nodaemonize
+CMD ["php-fpm56","--nodaemonize"]
