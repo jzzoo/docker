@@ -1,6 +1,6 @@
 FROM centos:6.8
 
-# 安装基础工具		
+# Installation of basic tools
 RUN yum update -y \
 	&& yum install \
 		vim \
@@ -29,7 +29,7 @@ RUN yum update -y \
 		openssl-devel \
 		-y
 		  
-# 创建工作目录
+# Create a work directory
 RUN set -ex \
 	&& cd / \
 	&& if [ ! -d "data" ]; then \
@@ -38,10 +38,10 @@ RUN set -ex \
 	&& chmod 755 data
 	# && cd data
 	   
-# 定义工作目录
+# Defining the working directory
 WORKDIR /data
 
-# 安装GD2
+# Install GD2  todo 
 # RUN set -ex \
 #	&& cd /data \
 #	&& wget http://www.boutell.com/gd/http/gd-2.0.33.tar.gz \
@@ -51,7 +51,7 @@ WORKDIR /data
 #	&& make \
 #	&& make install 
 
-# 安装libmcrypt
+# Install libmcrypt
 RUN set -ex \
 	&& cd /data \
 	&& wget ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/attic/libmcrypt/libmcrypt-2.5.7.tar.gz \
@@ -61,12 +61,12 @@ RUN set -ex \
 	&& make \
 	&& make install 
 	
-# 创建WWW用户
+# Creating WWW users
 RUN set -ex \
 	&& groupadd www \
 	&& useradd -g www www
 
-# 安装PHP	
+# Install PHP
 RUN set -ex \
 	&& cd /data \
 	&& wget http://php.net/get/php-5.6.36.tar.gz/from/us2.php.net/mirror \
@@ -99,21 +99,21 @@ RUN set -ex \
 	&& cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm56 \
 	&& chmod 755 /etc/init.d/php-fpm56 \
 	&& cp php.ini-development /usr/local/php56/etc/php.ini \
-	# 目录已经切换了，操作得注意了
+	# The directory has been switched and the operation has to be paid attention to
 	&& cd /usr/local/php56/etc \
 	&& if [ ! -f "php-fpm.conf" ]; then \
 			cp php-fpm.conf.default php-fpm.conf; \
 	   fi \
-	&& sed -i 's/9000/9056/' ./php-fpm.conf \
-	# 目录已经切换了，操作得注意了
+	&& sed -i 's/127.0.0.1:9000/[::]:9056/' ./php-fpm.conf \
+	# The directory has been switched and the operation has to be paid attention to
 	&& cd /usr/local/php56/bin/ \
 	&& cp /usr/local/php56/bin/php /usr/local/bin/php \
 	&& cp /usr/local/php56/sbin/php-fpm /sbin/php-fpm56
 	
 	
-# 指定端口
+# Specified port
 EXPOSE 9056
 
-# 执行命令
+# Execute a command --- 
 # ENTRYPOINT php-fpm56 --nodaemonize
 CMD ["php-fpm56","--nodaemonize"]
