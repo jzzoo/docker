@@ -108,8 +108,8 @@ RUN set -ex \
 	&& cp /usr/local/php56/sbin/php-fpm /sbin/php-fpm56 \
 	&& yum clean all \
 	&& rm -rf /var/cache/yum/* \
-	# && rm -rf /data/libgd-2.2.5.tar.gz \
-	# && rm -rf /data/libgd-2.2.5 \
+	&& rm -rf /data/libgd-2.2.5.tar.gz \
+	&& rm -rf /data/libgd-2.2.5 \
 	&& rm -rf /data/libmcrypt-2.5.7.tar.gz \
 	&& rm -rf /data/libmcrypt-2.5.7 \
 	&& rm -rf /data/mirror \
