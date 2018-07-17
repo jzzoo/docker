@@ -1,7 +1,8 @@
 FROM centos:6.8
 
 # Installation of basic tools
-RUN yum update -y \
+RUN set -ex \
+	&& yum update -y \
 	&& yum install \
 		vim \
 		make \
@@ -11,6 +12,10 @@ RUN yum update -y \
 		gcc \
 		gcc-c++ \
 		autoconf \
+		libjpeg \
+		libjpeg-devel \
+		libpng \
+		libpng-devel \
 		freetype \
 		freetype-devel \
 		libxml2 \
@@ -27,51 +32,43 @@ RUN yum update -y \
 		curl-devel \
 		openssl \
 		openssl-devel \
-		-y
-		  
+		libXpm-devel.x86_64 \
+		-y \
 # Create a work directory
-RUN set -ex \
+# RUN set -ex \
 	&& cd / \
 	&& if [ ! -d "data" ]; then \
 			mkdir data; \
 	   fi \
-	&& chmod 755 data
+	&& chmod 755 data \
 	# && cd data
-	   
-# Defining the working directory
-WORKDIR /data
-
 # Install GD2  todo 
 # RUN set -ex \
-#	&& cd /data \
-#	&& wget http://www.boutell.com/gd/http/gd-2.0.33.tar.gz \
-#	&& tar zxvf gd-2.0.33.tar.gz \
-#	&& cd gd-2.0.33 \
-#	&& ./configure --prefix=/usr/local/gd2 \
-#	&& make \
-#	&& make install 
-
+	&& cd /data \
+	&& wget https://github.com/libgd/libgd/releases/download/gd-2.2.5/libgd-2.2.5.tar.gz \
+	&& tar zxvf libgd-2.2.5.tar.gz \
+	&& cd libgd-2.2.5 \
+	&& ./configure --prefix=/usr/local/gd2 \
+	&& make \
+	&& make install \
 # Install libmcrypt
-RUN set -ex \
+# RUN set -ex \
 	&& cd /data \
 	&& wget ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/attic/libmcrypt/libmcrypt-2.5.7.tar.gz \
 	&& tar -zxvf libmcrypt-2.5.7.tar.gz \
 	&& cd libmcrypt-2.5.7 \
 	&& ./configure --prefix=/usr/local/libmcrypt \
 	&& make \
-	&& make install 
-	
+	&& make install \
 # Creating WWW users
-RUN set -ex \
+# RUN set -ex \
 	&& groupadd www \
-	&& useradd -g www www
-
+	&& useradd -g www www \
 # Install PHP
-RUN set -ex \
+# RUN set -ex \
 	&& cd /data \
 	&& wget http://php.net/get/php-5.6.36.tar.gz/from/us2.php.net/mirror \
 	&& tar -zxvf mirror \
-	&& rm -rf mirror \
 	&& cd php-5.6.36/ \
 	&& ./configure \
 		--prefix=/usr/local/php56 \
@@ -90,7 +87,7 @@ RUN set -ex \
 		--with-zlib \
 		--with-mcrypt=/usr/local/libmcrypt/ \
 		--with-iconv \
-		# --with-gd=/usr/local/gd2/ \
+		--with-gd=/usr/local/gd2/ \
 		--disable-cgi \
 		--with-fpm-user=www \
 		--with-fpm-group=www \
@@ -108,11 +105,21 @@ RUN set -ex \
 	# The directory has been switched and the operation has to be paid attention to
 	&& cd /usr/local/php56/bin/ \
 	&& cp /usr/local/php56/bin/php /usr/local/bin/php \
-	&& cp /usr/local/php56/sbin/php-fpm /sbin/php-fpm56
+	&& cp /usr/local/php56/sbin/php-fpm /sbin/php-fpm56 \
+	&& yum clean all \
+	&& rm -rf /var/cache/yum/* \
+	# && rm -rf /data/libgd-2.2.5.tar.gz \
+	# && rm -rf /data/libgd-2.2.5 \
+	&& rm -rf /data/libmcrypt-2.5.7.tar.gz \
+	&& rm -rf /data/libmcrypt-2.5.7 \
+	&& rm -rf /data/mirror \
+	&& rm -rf /data/php-5.6.36
 	
+# Defining the working directory
+WORKDIR /data
 	
 # Specified port
-EXPOSE 9056
+EXPOSE 9056 
 
 # Execute a command --- 
 # ENTRYPOINT php-fpm56 --nodaemonize
