@@ -6,7 +6,7 @@ Record the pit I met with docker
 * **About build**
 
 ```
-$  docker build -t php:5.6-fpm .
+$  docker build -t php-fpm:5.6 .
 ......
 ......
 Step 10/10 : CMD ["php-fpm56"," --nodaemonize"]
