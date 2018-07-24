@@ -48,7 +48,12 @@ Docker must be a "foreground process", otherwise docker will stop immediately af
 > 2. We used to use ``php -S 127.0.0.1:80`` before, and now we can: ``php -S [::]:80``
 > 3. In a word, it can't appear ``127.0.0.1``,5555.In this way, you can play: ``netstat -ano``, ``docker port a3a0cfd83232``, ``setenforce 0 ``and so on.
 
+* **About nginx**
 
+When nginx and php-fpm are not in one place, the configuration of nginx is different from the traditional configuration.
+
+> 1. Do not use ``UNIX socket`` communication mode. You should use ``TCP socket`` mode.
+> 2. Pay attention to configuring the script path, the ``SCRIPT_FILENAME`` parameter should take the file root path, such as:`` fastcgi_param SCRIPT_FILENAME /data/XXX/$real_script_name; ``, of course, you can also use ``$document_root``, such as: ``fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;``.
 
 
 
