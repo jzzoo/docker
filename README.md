@@ -3,7 +3,7 @@
 Record the pit I met with docker
 
 
-* **docker build -t  name:tag**
+* **About build**
 
 ```
 $  docker build -t php:5.6-fpm .
@@ -19,7 +19,7 @@ SECURITY WARNING: ... Windows ... '-rwxr-xr-x' permissions......  directories.
 ````
 
 
-* **docker run -p 9056:9056 --name xxx   -d name:tag**
+* **About run**
 
 ```
 $ docker run -p 9056:9056 --name php5.6 -v D:\wwwroot:/data -d php-fpm:5.6
@@ -40,7 +40,7 @@ Docker must be a "foreground process", otherwise docker will stop immediately af
  > 4. When performing ``docker run``, run a loop at the back, 
     such as: ``docker run -d php-fpm:5.6 /bin/sh -c "while true; do echo 123; sleep 1; done"``
 
-* **About port**
+* **About network**
 
  In addition, the problem of network port mapping is sometimes normal, but it can not be accessed.
  
