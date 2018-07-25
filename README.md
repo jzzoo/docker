@@ -3,10 +3,10 @@
 Record the pit I met with docker
 
 
-* **docker build -t  name:tag**
+* **About build**
 
 ```
-$  docker build -t php:5.6-fpm .
+$  docker build -t php-fpm:5.6 .
 ......
 ......
 Step 10/10 : CMD ["php-fpm56"," --nodaemonize"]
@@ -19,7 +19,7 @@ SECURITY WARNING: ... Windows ... '-rwxr-xr-x' permissions......  directories.
 ````
 
 
-* **docker run -p 9056:9056 --name xxx   -d name:tag**
+* **About run**
 
 ```
 $ docker run -p 9056:9056 --name php5.6 -v D:\wwwroot:/data -d php-fpm:5.6
@@ -40,7 +40,7 @@ Docker must be a "foreground process", otherwise docker will stop immediately af
  > 4. When performing ``docker run``, run a loop at the back, 
     such as: ``docker run -d php-fpm:5.6 /bin/sh -c "while true; do echo 123; sleep 1; done"``
 
-* **About port**
+* **About network**
 
  In addition, the problem of network port mapping is sometimes normal, but it can not be accessed.
  
@@ -56,5 +56,9 @@ When nginx and php-fpm are not in one place, the configuration of nginx is diffe
 > 2. Pay attention to configuring the script path, the ``SCRIPT_FILENAME`` parameter should take the file root path, such as:`` fastcgi_param SCRIPT_FILENAME /data/XXX/$real_script_name; ``, of course, you can also use ``$document_root``, such as: ``fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;``.
 
 
+* **Other misc**
 
- 
+In the course of using, we will encounter various problems. What I write may not solve the problem, but at least it solves my problem.
+
+> 1. On the problem of terminal Chinese chaotic code, you can usually set **LANG** environment variables to solve the problem, such as: ``export LANG= "zh_CN.UTF-8"``, set up, remember ``source`` or **.** ,Let it take effect.
+> 2. As for the size of the mirror, like MYSQL's official mirror only a few hundred m, and we have a few g, why are there such a big difference? There are several common statements on the Internet. I tried to write all the **RUN** into 1 parts, and **&&** or join, and finally clear the ``cache`` of **Yum** or **apt-get**, and it really reduced the image by several hundred M.
