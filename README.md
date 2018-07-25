@@ -56,5 +56,9 @@ When nginx and php-fpm are not in one place, the configuration of nginx is diffe
 > 2. Pay attention to configuring the script path, the ``SCRIPT_FILENAME`` parameter should take the file root path, such as:`` fastcgi_param SCRIPT_FILENAME /data/XXX/$real_script_name; ``, of course, you can also use ``$document_root``, such as: ``fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;``.
 
 
+* **Other misc**
 
+In the course of using, we will encounter various problems. What I write may not solve the problem, but at least it solves my problem.
+
+> 1. On the problem of terminal Chinese chaotic code, you can usually set **LANG** environment variables to solve the problem, such as: ``export LANG= "zh_CN.UTF-8"``, set up, remember ``source or``**.**``,Let it take effect.
  
