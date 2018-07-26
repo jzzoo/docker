@@ -37,14 +37,14 @@ RUN set -ex \
 # Create a work directory
 # RUN set -ex \
 	&& cd / \
-	&& if [ ! -d "data" ]; then \
-			mkdir data; \
+	&& if [ ! -d "lnmp" ]; then \
+			mkdir lnmp; \
 	   fi \
-	&& chmod 755 data \
-	# && cd data
+	&& chmod 755 lnmp \
+	# && cd lnmp
 # Install GD2  todo 
 # RUN set -ex \
-	&& cd /data \
+	&& cd /lnmp \
 	&& wget https://github.com/libgd/libgd/releases/download/gd-2.2.5/libgd-2.2.5.tar.gz \
 	&& tar zxvf libgd-2.2.5.tar.gz \
 	&& cd libgd-2.2.5 \
@@ -53,7 +53,7 @@ RUN set -ex \
 	&& make install \
 # Install libmcrypt
 # RUN set -ex \
-	&& cd /data \
+	&& cd /lnmp \
 	&& wget ftp://mcrypt.hellug.gr/pub/crypto/mcrypt/attic/libmcrypt/libmcrypt-2.5.7.tar.gz \
 	&& tar -zxvf libmcrypt-2.5.7.tar.gz \
 	&& cd libmcrypt-2.5.7 \
@@ -67,7 +67,7 @@ RUN set -ex \
 # Install PHP
 # RUN set -ex \
 # -Install PHP56------------------------
-	&& cd /data \
+	&& cd /lnmp \
 	&& rm -rf mirror \
 	&& wget http://php.net/get/php-5.6.36.tar.gz/from/us2.php.net/mirror \
 	&& tar -zxvf mirror \
@@ -110,7 +110,7 @@ RUN set -ex \
 	&& cp /usr/local/php56/bin/php /usr/local/bin/php56 \
 	&& cp /usr/local/php56/sbin/php-fpm /sbin/php-fpm56 \
 #-Install PHP72------------------------
-	&& cd /data \
+	&& cd /lnmp \
 	&& rm -rf mirror \
 	&& wget http://php.net/get/php-7.2.8.tar.gz/from/us2.php.net/mirror \
 	&& tar -zxvf mirror \
@@ -158,21 +158,21 @@ RUN set -ex \
 	&& cd /etc/yum.repos.d/ \
 	&& wget http://mirrors.shopex.cn/shopex/shopex-lnmp/shopex-lnmp.repo \
 	&& yum install epel-release -y \
-	&& yum install ngx_openresty redis -y \
-	&& rm -rf /data/mirror \
+	&& yum install ngx_openresty redis mysql -y \
+	&& rm -rf /lnmp/mirror \
 	&& yum clean all \
 	&& rm -rf /var/cache/yum/* \
-	&& rm -rf /data/libgd-2.2.5.tar.gz \
-	&& rm -rf /data/libgd-2.2.5 \
-	&& rm -rf /data/libmcrypt-2.5.7.tar.gz \
-	&& rm -rf /data/libmcrypt-2.5.7 
+	&& rm -rf /lnmp/libgd-2.2.5.tar.gz \
+	&& rm -rf /lnmp/libgd-2.2.5 \
+	&& rm -rf /lnmp/libmcrypt-2.5.7.tar.gz \
+	&& rm -rf /lnmp/libmcrypt-2.5.7 
 	
 	
 # Defining the working directory
-WORKDIR /data
+WORKDIR /lnmp
 	
 # Specified port
-EXPOSE 9056 9072 80
+EXPOSE 9056 9072 3306 6379 80
 
 ADD start.sh /startup.sh
 RUN chmod 755 /startup.sh

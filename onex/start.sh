@@ -25,7 +25,7 @@ function runing(){
 	
 	if (ps aux|grep -v grep|grep redis)
 	then
-		echo "nginx runing ...."
+		echo "redis runing ...."
 	else
 		redis-server
 	fi
