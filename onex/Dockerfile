@@ -174,7 +174,11 @@ WORKDIR /lnmp
 # Specified port
 EXPOSE 9056 9072 3306 6379 80
 
+# Add the boot script
 ADD start.sh /startup.sh
+
+# Give script permissions
 RUN chmod 755 /startup.sh
 
+# Execute a command
 CMD ["/startup.sh"]

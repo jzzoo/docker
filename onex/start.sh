@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#  /usr/local/nginx/sbin/nginx
 function runing(){
 	if (ps aux|grep -v grep|grep php56)
 	then
@@ -21,6 +20,13 @@ function runing(){
 		echo "nginx runing ...."
 	else
 		/usr/local/nginx/sbin/nginx
+	fi
+	
+	if (ps aux|grep -v grep|grep mysql)
+	then
+		echo "mysql runing ...."
+	else
+		 /etc/init.d/mysqld start
 	fi
 	
 	if (ps aux|grep -v grep|grep redis)
