@@ -8,12 +8,27 @@ function runing(){
 	else
 		/usr/local/php56/sbin/php-fpm
 	fi
+	
 	if (ps aux|grep -v grep|grep php72)
 	then
 		echo "php72-fpm runing ...."
 	else
 		/usr/local/php72/sbin/php-fpm 
-	fi	
+	fi
+	
+	if (ps aux|grep -v grep|grep nginx)
+	then
+		echo "nginx runing ...."
+	else
+		/usr/local/nginx/sbin/nginx
+	fi
+	
+	if (ps aux|grep -v grep|grep redis)
+	then
+		echo "nginx runing ...."
+	else
+		redis-server
+	fi
 }
 
 while true; 
