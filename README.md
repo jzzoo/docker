@@ -62,3 +62,6 @@ In the course of using, we will encounter various problems. What I write may not
 
 > 1. On the problem of terminal Chinese chaotic code, you can usually set **LANG** environment variables to solve the problem, such as: ``export LANG= "zh_CN.UTF-8"``, set up, remember ``source`` or **.** ,Let it take effect.
 > 2. As for the size of the mirror, like MYSQL's official mirror only a few hundred m, and we have a few g, why are there such a big difference? There are several common statements on the Internet. I tried to write all the **RUN** into 1 parts, and **&&** or join, and finally clear the ``cache`` of **Yum** or **apt-get**, and it really reduced the image by several hundred M.
+> 3. If you encounter such an error in the construction process，``Error: Cannot retrieve repository metadata (repomd.xml) for repository: extras. Please verify its path and try again
+Could not retrieve mirrorlist http://mirrorlist.centos.org/?release=6&arch=x86_64&repo=extras&infra=stock error was
+14: PYCURL ERROR 52 - "Empty reply from server"`` please re execute the build command.
