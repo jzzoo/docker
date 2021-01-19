@@ -74,5 +74,13 @@ ERROR: Encountered errors while bringing up the project. (Windows 10 and Docker 
   5.1 Restart the docker
   5.2 The credentials for the mount have expired, reset them
 
+> 6. About Centos 6 YUM invalidation. The error message: `Loaded plugins: fastestmirror
+Setting up Install Process
+Determining fastest mirrors
+YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
+ Eg. Invalid release/repo/arch combination/
+removing mirrorlist with no valid mirrors: /var/cache/yum/x86_64/6/base/mirrorlist.txt
+Error: Cannot find a valid baseurl for repo: base`. If you encounter such an error, delete all the *.repo in /etc/yum.repos. D directory and then download a Tencent Cloud Yum repo
+
 
 
