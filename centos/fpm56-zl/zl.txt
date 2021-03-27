@@ -1,0 +1,14 @@
+[root@6b53bdba0751 /]# php hardware.sh
+M:A5VAL-TRSMH-HCXJ4-A2M6P
+
+[root@ade1389d0fdb /]# php -f hardware.sh
+M:MNGMJ-TKC4C-YX4F8-875QW
+
+[root@4bfd8594162a /]# php -f hardware.sh
+M:37RDL-9D7ZW-8E4KM-AG45F
+
+[root@e887728fd94c data]# php -f hardware.sh
+M:XX3G7-GF4YP-2XJED-M9XEH
+
+[root@74f6e51c6377 data]# php -f hardware.sh
+M:ALKVU-ALXE3-XM4SY-6ZL87
