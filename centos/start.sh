@@ -1,19 +1,7 @@
 #!/bin/bash
 
 function sruning(){
-	if (ps aux|grep -v grep|grep BT)
-	then
-		echo "bt runing ...."
-	else
-		/etc/init.d/bt start
-	fi
-
-	if (ps aux|grep -v grep|grep sshd)
-	then
-		echo "sshd runing ...."
-	else
-		/usr/sbin/sshd -D
-	fi
+	echo "时间是：`date '+%Y-%m-%d %H:%M:%S'`" >> /tmp/sruning.log
 }
 
 while true;
