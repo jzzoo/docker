@@ -82,5 +82,7 @@ YumRepo Error: All mirror URLs are not using ftp, http[s] or file.
 removing mirrorlist with no valid mirrors: /var/cache/yum/x86_64/6/base/mirrorlist.txt
 Error: Cannot find a valid baseurl for repo: base`. If you encounter such an error, delete all the *.repo in /etc/yum.repos. D directory and then download a Tencent Cloud Yum repo
 
+> 7. About files, *.tar.gz type files should use COPY instead of ADD.
+
 
 
